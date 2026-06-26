@@ -1,5 +1,5 @@
 ---
-name: code-reviewer
+name: code-quality-reviewer
 description: Use this agent when you need to review code for adherence to project guidelines, style guides, and best practices. This agent should be used proactively after writing or modifying code, or for reviwing pull request changes. 
 ---
 
