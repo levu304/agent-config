@@ -1,0 +1,313 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permissions": [
+    {
+      "action": "read",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "glob",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "grep",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "shell",
+      "resource": "git status *",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "git log *",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "sleep *",
+      "effect": "deny",
+    },
+    {
+      "action": "subagent",
+      "resource": "*",
+      "effect": "deny",
+    },
+    {
+      "action": "question",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "skill",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "deny",
+    },
+    {
+      "action": "external_directory",
+      "resource": "/tmp/**",
+      "effect": "allow",
+    },
+    {
+      "action": "<server>_<tool>",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "opencode_list_mcp_resources",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "opencode_read_mcp_resource",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "webfetch",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "allow",
+    },
+    {
+      "action": "execute",
+      "resource": "*",
+      "effect": "ask",
+    },
+  ],
+  "agents": {
+    "meta-orchestrator": {
+      "permissions": [
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "webfetch",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "websearch",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "explore",
+          "effect": "allow",
+        },
+      ],
+    },
+    "spec-architect": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "edit",
+          "resource": "openspec/*",
+          "effect": "allow",
+        },
+        {
+          "action": "execute",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "subagent",
+          "resource": "explore",
+          "effect": "allow",
+        },
+      ],
+    },
+    "research-analyst": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "edit",
+          "resource": "docs/research/*.md",
+          "effect": "allow",
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "subagent",
+          "resource": "explore",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+      ],
+    },
+    "technical-writer": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "edit",
+          "resource": "**/*.md",
+          "effect": "allow",
+        },
+      ],
+    },
+    "error-detective": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "edit",
+          "resource": "docs/rca/*.md",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "explore",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+      ],
+    },
+    "code-reviewer": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "subagent",
+          "resource": "debugger",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+      ]
+    },
+    "bug-hunter": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "edit",
+          "resource": "docs/**/*.md",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+      ]
+    }
+  },
+  "mcp": {
+    "timeout": {
+      "startup": 45000,
+      "catalog": 30000,
+      "execution": 600000,
+    },
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+      },
+      "prompts.chat": {
+        "type": "remote",
+        "url": "https://prompts.chat/api/mcp",
+      },
+      "gh_grep": {
+        "type": "remote",
+        "url": "https://mcp.grep.app",
+      },
+      "gitnexus": {
+        "type": "local",
+        "command": ["gitnexus", "mcp"],
+      },
+      "sequential-thinking": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking",
+        ],
+      },
+      "serena": {
+        "type": "local",
+        "command": [
+          "uvx",
+          "--from",
+          "serena-agent",
+          "serena",
+          "start-mcp-server",
+          "--project-from-cwd",
+          "--context",
+          "agent",
+          "--open-web-dashboard",
+          "False",
+        ],
+      },
+      "context-mode": {
+        "type": "local",
+        "command": ["context-mode"],
+      },
+    },
+  },
+  "plugins": ["opencode-cmd-provider@2.2.8", "@dietrichgebert/ponytail"],
+}
