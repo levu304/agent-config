@@ -235,7 +235,7 @@
           "resource": "technical-writer",
           "effect": "allow",
         },
-      ]
+      ],
     },
     "bug-hunter": {
       "permissions": [
@@ -254,8 +254,8 @@
           "resource": "technical-writer",
           "effect": "allow",
         },
-      ]
-    }
+      ],
+    },
   },
   "mcp": {
     "timeout": {
@@ -283,8 +283,7 @@
       "sequential-thinking": {
         "type": "local",
         "command": [
-          "npx",
-          "-y",
+          "bunx",
           "@modelcontextprotocol/server-sequential-thinking",
         ],
       },
@@ -306,6 +305,15 @@
       "context-mode": {
         "type": "local",
         "command": ["context-mode"],
+      },
+      "chrome-devtools": {
+        "type": "local",
+        "command": [
+          "bunx",
+          "chrome-devtools-mcp@latest",
+          "--slim",
+          "--headless",
+        ],
       },
     },
   },
