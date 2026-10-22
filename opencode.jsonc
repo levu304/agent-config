@@ -42,6 +42,16 @@
       "effect": "deny",
     },
     {
+      "action": "shell",
+      "resource": "perl *",
+      "effect": "deny",
+    },
+    {
+      "action": "shell",
+      "resource": "awk *",
+      "effect": "deny",
+    },
+    {
       "action": "subagent",
       "resource": "*",
       "effect": "deny",
@@ -98,6 +108,7 @@
     },
   ],
   "agents": {
+    "compaction": { "model": "opencode-go/muse-spark-1.3-contributor" },
     "meta-orchestrator": {
       "permissions": [
         {
@@ -116,13 +127,18 @@
           "effect": "deny",
         },
         {
-          "action": "subagent",
+          "action": "skill",
           "resource": "*",
+          "effect": "deny",
+        },
+        {
+          "action": "skill",
+          "resource": "delegate-subagent",
           "effect": "allow",
         },
         {
           "action": "subagent",
-          "resource": "explore",
+          "resource": "*",
           "effect": "allow",
         },
       ],
@@ -142,12 +158,32 @@
         {
           "action": "execute",
           "resource": "*",
-          "effect": "deny",
+          "effect": "ask",
+        },
+        {
+          "action": "skill",
+          "resource": "delegate-subagent",
+          "effect": "allow",
         },
         {
           "action": "subagent",
           "resource": "explore",
           "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+        {
+          "action": "shell",
+          "resource": "node *",
+          "effect": "deny",
+        },
+        {
+          "action": "shell",
+          "resource": "python3 *",
+          "effect": "deny",
         },
       ],
     },
@@ -159,14 +195,14 @@
           "effect": "deny",
         },
         {
-          "action": "edit",
-          "resource": "docs/research/*.md",
-          "effect": "allow",
-        },
-        {
           "action": "shell",
           "resource": "*",
           "effect": "deny",
+        },
+        {
+          "action": "skill",
+          "resource": "delegate-subagent",
+          "effect": "allow",
         },
         {
           "action": "subagent",
@@ -202,8 +238,8 @@
           "effect": "deny",
         },
         {
-          "action": "edit",
-          "resource": "docs/rca/*.md",
+          "action": "skill",
+          "resource": "delegate-subagent",
           "effect": "allow",
         },
         {
@@ -216,6 +252,11 @@
           "resource": "technical-writer",
           "effect": "allow",
         },
+        {
+          "action": "subagent",
+          "resource": "debugger",
+          "effect": "allow",
+        },
       ],
     },
     "code-reviewer": {
@@ -226,9 +267,14 @@
           "effect": "deny",
         },
         {
-          "action": "subagent",
-          "resource": "debugger",
+          "action": "skill",
+          "resource": "delegate-subagent",
           "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "ask",
         },
         {
           "action": "subagent",
@@ -245,8 +291,22 @@
           "effect": "deny",
         },
         {
-          "action": "edit",
-          "resource": "docs/**/*.md",
+          "action": "skill",
+          "resource": "delegate-subagent",
+          "effect": "allow",
+        },
+        {
+          "action": "subagent",
+          "resource": "technical-writer",
+          "effect": "allow",
+        },
+      ],
+    },
+    "debugger": {
+      "permissions": [
+        {
+          "action": "skill",
+          "resource": "delegate-subagent",
           "effect": "allow",
         },
         {
@@ -315,7 +375,16 @@
           "--headless",
         ],
       },
+      "firefox-devtools": {
+        "type": "local",
+        "command": [
+          "bunx",
+          "@mozilla/firefox-devtools-mcp@latest",
+          "--headless",
+          "--tool-preset developer"
+        ],
+      },
     },
   },
-  "plugins": ["opencode-cmd-provider@2.2.8", "@dietrichgebert/ponytail"],
+  "plugins": ["opencode-cmd-provider@2.2.11", "@dietrichgebert/ponytail"],
 }
